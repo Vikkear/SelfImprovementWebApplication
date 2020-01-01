@@ -17,6 +17,7 @@ CREATE TABLE Trackers
     (30),
     dateSubmitted TIMESTAMP NOT NULL,
     category VARCHAR
-    (30)
+    (30),
+    amount INT NOT NULL
 );
 

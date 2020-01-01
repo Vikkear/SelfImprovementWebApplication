@@ -19,6 +19,10 @@ module.exports = db.sequelize.define(
     },
     category: {
       type: Sequelize.STRING
+    },
+    amount: {
+      type: Sequelize.INTEGER,
+      allowNull: false
     }
   },
   {

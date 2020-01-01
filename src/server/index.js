@@ -7,6 +7,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const User = require("./db/models/User");
+const Tracker = require("./db/models/Tracker");
 
 let allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -61,6 +62,30 @@ app.post("/register", (req, res) => {
       }
     })
     .catch(err => err);
+});
+
+app.post("/addEntry", (req, res) => {
+  const todayString = new Date();
+
+  let data = {
+    username: req.body.username,
+    category: req.body.category,
+    amount: req.body.value,
+    dateSubmitted: todayString
+  };
+
+  Tracker.create({
+    username: data.username,
+    dateSubmitted: data.dateSubmitted,
+    category: data.category,
+    amount: data.amount
+  })
+    .then(resTwo => {
+      res.status(200).json({ message: "Entry added" });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 // Start up server and begin listen to requests
