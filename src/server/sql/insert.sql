@@ -1,6 +1,6 @@
 USE selfimprovement;
 
-INSERT INTO users
+INSERT INTO Users
     (username, password)
 VALUES
     ('Hej', '123');

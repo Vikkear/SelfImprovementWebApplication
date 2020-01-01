@@ -1,8 +1,8 @@
 USE selfimprovement;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS Users;
 
-CREATE TABLE users
+CREATE TABLE Users
 (
     username VARCHAR(30),
     password VARCHAR(30)
