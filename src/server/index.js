@@ -8,6 +8,15 @@ const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const User = require("./db/models/User");
 
+let allowCrossDomain = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Methods", "POST");
+  next();
+};
+app.use(express.json());
+app.use(allowCrossDomain);
+
 // Middleware
 app.use((req, res, next) => {
   console.info(`Got request on ${req.path} (${req.method}).`);
@@ -18,10 +27,20 @@ app.get("/", (req, res) => {
   res.json({ Message: "hej" });
 });
 
-app.get("/users", (req, res) => {
-  User.findAll().then(users => {
-    res.json(users);
-  });
+app.post("/login", (req, res) => {
+  let data = { username: req.body.username, password: req.body.password };
+
+  User.findOne({
+    where: { username: data.username, password: data.password }
+  })
+    .then(users => {
+      if (users) {
+        res.status(200).json(users);
+      } else {
+        res.status(202).json({ message: "User not found" });
+      }
+    })
+    .catch(err => err);
 });
 
 // Start up server and begin listen to requests
