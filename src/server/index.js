@@ -43,6 +43,26 @@ app.post("/login", (req, res) => {
     .catch(err => err);
 });
 
+app.post("/register", (req, res) => {
+  let data = { username: req.body.username, password: req.body.password };
+
+  User.findOne({
+    where: { username: data.username, password: data.password }
+  })
+    .then(user => {
+      if (!user) {
+        User.create({ username: data.username, password: data.password })
+          .then(resTwo => {
+            res.json(resTwo);
+          })
+          .catch(errTwo => errTwo);
+      } else {
+        res.status(202).json({ message: "User already exists" });
+      }
+    })
+    .catch(err => err);
+});
+
 // Start up server and begin listen to requests
 app.listen(port, () => {
   console.info(`Server is listening on port ${port}.`);

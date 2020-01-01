@@ -5,32 +5,38 @@ const Header = () => {
   const [updated, setUpdated] = useState(false);
 
   const logoutPressed = () => {
-    console.log("hej");
     localStorage.removeItem("loggedin");
+    localStorage.removeItem("username");
     setUpdated(!updated);
+    window.location.replace("http://localhost:3000/");
   };
 
   useEffect(() => {}, [updated]);
 
   return (
     <ul>
-      <li>
-        {localStorage.loggedin ? (
-          <a onClick={logoutPressed}>Logout</a>
-        ) : (
+      {localStorage.loggedin ? (
+        <div>
+          <li>
+            <a onClick={logoutPressed}>Logout</a>
+          </li>
+          <li>
+            <a href="tracker">Tracker</a>
+          </li>
+          <li>
+            <a href="quests">Quests</a>
+          </li>
+        </div>
+      ) : (
+        <li>
           <a href="login">Login</a>
-        )}
-      </li>
+        </li>
+      )}
+
       <li>
         <a class="active" href="/">
           Home
         </a>
-      </li>
-      <li>
-        <a href="tracker">Tracker</a>
-      </li>
-      <li>
-        <a href="quests">Quests</a>
       </li>
     </ul>
   );
