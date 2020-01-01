@@ -1,14 +1,19 @@
 import React from "react";
-import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import home from "./components/home";
+import login from "./components/login";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Knas</p>
-      </header>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={home} />
+          <Route exact path="/login" component={login} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
