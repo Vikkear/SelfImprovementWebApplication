@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const User = require("./db/models/User");
 const Tracker = require("./db/models/Tracker");
+const Categories = require("./db/models/Categories");
 
 let allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -74,6 +75,18 @@ app.post("/addEntry", (req, res) => {
     dateSubmitted: todayString
   };
 
+  Categories.findOne({ where: { category: data.category } })
+    .then(resTwo => {
+      if (!resTwo) {
+        Categories.create({ category: data.category })
+          .then(res => {})
+          .catch(err => console.log(err));
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
   Tracker.create({
     username: data.username,
     dateSubmitted: data.dateSubmitted,
@@ -86,6 +99,24 @@ app.post("/addEntry", (req, res) => {
     .catch(err => {
       console.log(err);
     });
+});
+
+app.get("/categories", (req, res) => {
+  Categories.findAll()
+    .then(categories => {
+      res.status(200).json({ data: categories });
+    })
+    .catch(err => err);
+});
+
+app.post("/tracker", (req, res) => {
+  Tracker.findAll({
+    where: { username: req.body.username, category: req.body.category }
+  })
+    .then(resTwo => {
+      res.status(200).json({ tracker: resTwo });
+    })
+    .catch(err => err);
 });
 
 // Start up server and begin listen to requests

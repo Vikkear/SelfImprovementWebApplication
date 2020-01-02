@@ -4,7 +4,7 @@ import AddEntry from "./AddEntry";
 import ViewEntry from "./ViewEntry";
 
 const Tracker = () => {
-  const [mode, setMode] = useState(1);
+  const [mode, setMode] = useState(0);
 
   const addEntry = () => {
     setMode(1);

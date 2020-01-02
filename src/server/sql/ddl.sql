@@ -2,6 +2,7 @@ USE selfimprovement;
 
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Trackers;
+DROP TABLE IF EXISTS Categories;
 
 CREATE TABLE Users
 (
@@ -19,5 +20,13 @@ CREATE TABLE Trackers
     category VARCHAR
     (30),
     amount INT NOT NULL
+);
+
+    CREATE TABLE Categories
+    (
+        id INT NOT NULL
+        AUTO_INCREMENT PRIMARY KEY,
+category VARCHAR
+        (30)
 );
 
