@@ -1,0 +1,10 @@
+.navigationBtn {
+  background-color: rgb(41, 65, 87);
+  width: 13%;
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 8px;
+  margin-left: 2%;
+  margin-right: 2%;
+}

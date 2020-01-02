@@ -36,7 +36,16 @@ const ViewEntry = () => {
 
       {showCategory ? <h1>{showCategory}</h1> : <p></p>}
       {showCategoryArr ? (
-        showCategoryArr.map(category => <p>{category.category}</p>)
+        showCategoryArr.map(category => (
+          <div>
+            <p>
+              {"Date: "}
+              {new Date(category.dateSubmitted).toLocaleDateString("sv")}
+              {" Amount: "}
+              {category.amount}
+            </p>
+          </div>
+        ))
       ) : (
         <p></p>
       )}

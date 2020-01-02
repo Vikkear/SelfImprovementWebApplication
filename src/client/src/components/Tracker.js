@@ -4,7 +4,7 @@ import AddEntry from "./AddEntry";
 import ViewEntry from "./ViewEntry";
 
 const Tracker = () => {
-  const [mode, setMode] = useState(0);
+  const [mode, setMode] = useState(1);
 
   const addEntry = () => {
     setMode(1);
@@ -16,7 +16,7 @@ const Tracker = () => {
 
   return (
     <div>
-      <h1> Tracker (Work in progress) </h1>
+      <h1> Tracker </h1>
       <Button variant="primary" onClick={addEntry}>
         Add entry
       </Button>{" "}
