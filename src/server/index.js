@@ -9,6 +9,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const User = require("./db/models/User");
 const Tracker = require("./db/models/Tracker");
 const Categories = require("./db/models/Categories");
+const path = require("path");
 
 let allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -18,6 +19,9 @@ let allowCrossDomain = function (req, res, next) {
 };
 app.use(express.json());
 app.use(allowCrossDomain);
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, "src/client/build")));
 
 // Middleware
 app.use((req, res, next) => {
@@ -117,6 +121,11 @@ app.post("/tracker", (req, res) => {
       res.status(200).json({ tracker: resTwo });
     })
     .catch((err) => err);
+});
+
+// Handles any requests that don't match the ones above
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/src/client/build/index.html"));
 });
 
 // Start up server and begin listen to requests
