@@ -20,3 +20,4 @@ Small React project that I am working on where you can set up different categori
 - sub quests in to do list
 - customize backgrounds
 - Polish the UI and make it look nicer
+- FlexBox/Bootstrap
