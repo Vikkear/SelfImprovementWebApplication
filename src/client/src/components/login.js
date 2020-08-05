@@ -8,50 +8,50 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const loginPressed = props => {
+  const loginPressed = (props) => {
     const data = { username: username, password: password };
 
     axios
-      .post("http://localhost:8000/login", data, {
+      .post("/login", data, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       })
-      .then(res => {
+      .then((res) => {
         if (res.data.username) {
           localStorage.loggedin = 1;
           localStorage.username = res.data.username;
           // TODO: Fix so it works on an app
-          window.location.replace("http://localhost:3000/");
+          window.location.replace("/");
         } else {
           setErrorMessage("Username or password is incorrect");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setErrorMessage("Username or password is incorrect");
       });
   };
 
-  const registerPressed = props => {
+  const registerPressed = (props) => {
     const data = { username: username, password: password };
 
     axios
-      .post("http://localhost:8000/register", data, {
+      .post("/register", data, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       })
-      .then(res => {
+      .then((res) => {
         if (res.data.username) {
           localStorage.loggedin = 1;
           localStorage.username = res.data.username;
           // TODO: Fix so it works on an app
-          window.location.replace("http://localhost:3000/");
+          window.location.replace("/");
         } else {
           setErrorMessage("Username or password is incorrect");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setErrorMessage("Username or password is incorrect");
       });
   };
@@ -61,12 +61,15 @@ const Login = () => {
       <h1>Login</h1>
       <form>
         <label>Username: </label> <br />
-        <input type="text" onChange={e => setUsername(e.target.value)}></input>
+        <input
+          type="text"
+          onChange={(e) => setUsername(e.target.value)}
+        ></input>
         <br />
         <label>Password: </label> <br />
         <input
           type="password"
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>{" "}
         <br /> <br />
         <Button variant="primary" onClick={loginPressed}>

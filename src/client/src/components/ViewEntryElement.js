@@ -2,24 +2,24 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 
-const ViewEntryElement = props => {
+const ViewEntryElement = (props) => {
   const submitEntry = () => {
     const data = {
       username: localStorage.getItem("username"),
-      category: props.categoryName
+      category: props.categoryName,
     };
 
     axios
-      .post("http://localhost:8000/tracker", data, {
+      .post("/tracker", data, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       })
-      .then(res => {
+      .then((res) => {
         props.showCategoryArr(res.data.tracker);
         props.showCategory(props.categoryName);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };

@@ -8,7 +8,7 @@ const Header = () => {
     localStorage.removeItem("loggedin");
     localStorage.removeItem("username");
     setUpdated(!updated);
-    window.location.replace("http://localhost:3000/");
+    window.location.replace("/");
   };
 
   useEffect(() => {}, [updated]);

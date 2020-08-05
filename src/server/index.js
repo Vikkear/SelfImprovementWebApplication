@@ -1,5 +1,5 @@
 "use strict";
-const port = process.env.NODE_ENV === "dev" ? 8000 : process.env.PORT;
+const port = process.env.PORT || 8000;
 
 // Set up Express server
 const express = require("express");
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(allowCrossDomain);
 
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, "src/client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 // Middleware
 app.use((req, res, next) => {
@@ -125,7 +125,7 @@ app.post("/tracker", (req, res) => {
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/src/client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/../client/build/index.html"));
 });
 
 // Start up server and begin listen to requests

@@ -10,11 +10,11 @@ const ViewEntry = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/categories")
-      .then(res => {
+      .get("/categories")
+      .then((res) => {
         setCategoryArr(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, [updated]);
@@ -26,7 +26,7 @@ const ViewEntry = () => {
   return (
     <div>
       <h1>View</h1>
-      {categoryArr.map(category => (
+      {categoryArr.map((category) => (
         <ViewEntryElement
           categoryName={category.category}
           showCategory={setShowCategory}
@@ -36,7 +36,7 @@ const ViewEntry = () => {
 
       {showCategory ? <h1>{showCategory}</h1> : <p></p>}
       {showCategoryArr ? (
-        showCategoryArr.map(category => (
+        showCategoryArr.map((category) => (
           <div>
             <p>
               {"Date: "}

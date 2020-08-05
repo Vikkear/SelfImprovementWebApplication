@@ -3,11 +3,11 @@ import "./style/home.css";
 
 const home = () => {
   const tracker = () => {
-    window.location.replace("http://localhost:3000/tracker");
+    window.location.replace("/tracker");
   };
 
   const quests = () => {
-    window.location.replace("http://localhost:3000/quests");
+    window.location.replace("/quests");
   };
 
   return (
