@@ -1,5 +1,5 @@
 "use strict";
-const port = process.env.NODE_ENV === "dev" ? 8000 : 80;
+const port = process.env.NODE_ENV === "dev" ? 8000 : process.env.PORT;
 
 // Set up Express server
 const express = require("express");

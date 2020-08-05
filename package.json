@@ -9,7 +9,7 @@
     "dev": "SET NODE_ENV=dev&& concurrently \"npm run server\" \"npm run client\"",
     "start": "export NODE_ENV=prod&& concurrently \"npm run server\" \"npm run client\"",
     "winStart": "SET NODE_ENV=prod&& concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "npm install && npm run build",
+    "heroku-postbuild": "cd src/client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
