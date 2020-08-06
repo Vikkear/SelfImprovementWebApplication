@@ -6,9 +6,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-const User = require("./db/models/User");
-const Tracker = require("./db/models/Tracker");
-const Categories = require("./db/models/Categories");
 const path = require("path");
 
 let allowCrossDomain = function (req, res, next) {
