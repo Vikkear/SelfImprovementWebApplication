@@ -10,20 +10,20 @@ const AddEntry = () => {
     const data = {
       username: localStorage.username,
       category: category,
-      value: value
+      value: value,
     };
 
     axios
-      .post("http://localhost:8000/addEntry", data, {
+      .post("/addEntry", data, {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       })
-      .then(res => {
+      .then((res) => {
         setCategory("");
         setValue(0);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -36,14 +36,14 @@ const AddEntry = () => {
           type="text"
           placeholder="Category"
           value={category}
-          onChange={e => setCategory(e.target.value)}
+          onChange={(e) => setCategory(e.target.value)}
         />{" "}
         <br />
         <input
           type="text"
           placeholder="Value"
           value={value}
-          onChange={e => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
         />{" "}
         <br />
         <Button variant="primary" onClick={submitEntry}>
