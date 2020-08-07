@@ -1,13 +1,17 @@
 import React from "react";
 import "./style/home.css";
 
-const home = () => {
+const Home = () => {
   const tracker = () => {
     window.location.replace("/tracker");
   };
 
   const quests = () => {
     window.location.replace("/quests");
+  };
+
+  const todo = () => {
+    window.location.replace("/todo");
   };
 
   return (
@@ -19,8 +23,11 @@ const home = () => {
       <div className="navigationBtn" onClick={quests}>
         Quests (WIP) <br /> Add/Show Quests
       </div>
+      <div className="navigationBtn" onClick={todo}>
+        Todo (WIP) <br /> Todo list
+      </div>
     </div>
   );
 };
 
-export default home;
+export default Home;

@@ -1,0 +1,17 @@
+.todo {
+  background-color: #fbe788;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.wrapper {
+  vertical-align: bottom;
+}
+
+.saveBtn {
+  text-align: right;
+}
+
+.saveBtn Button {
+  width: 12rem;
+}

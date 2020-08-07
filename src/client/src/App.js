@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import home from "./components/home";
+import Home from "./components/Home";
 import login from "./components/login";
 import Header from "./components/header";
 import Tracker from "./components/Tracker";
@@ -14,7 +14,7 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route exact path="/" component={home} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/login" component={login} />
           <Route exact path="/tracker" component={Tracker} />
           <Route exact path="/quests" component={Quests} />
