@@ -4,7 +4,7 @@ import "./style/todo.css";
 
 const TodoElement = (props) => {
   const assignment = useState("Placeholder");
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -13,7 +13,6 @@ const TodoElement = (props) => {
   return (
     <div className="wrapper">
       <Checkbox
-        defaultChecked
         color="secondary"
         inputProps={{ "aria-label": "secondary checkbox" }}
       />

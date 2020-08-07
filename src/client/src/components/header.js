@@ -34,7 +34,7 @@ const Header = () => {
       )}
 
       <li>
-        <a class="active" href="/">
+        <a className="active" href="/">
           Home
         </a>
       </li>

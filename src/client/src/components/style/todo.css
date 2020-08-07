@@ -2,16 +2,39 @@
   background-color: #fbe788;
   color: black;
   font-size: 1.5rem;
+  width: 50rem;
+  text-align: left;
+  margin: 0 auto;
 }
 
 .wrapper {
   vertical-align: bottom;
 }
 
-.saveBtn {
+.btns {
   text-align: right;
 }
 
+.addBtn {
+  display: inline-block;
+}
+
+.addBtn Button {
+  width: 8rem;
+}
+
+.saveBtn {
+  display: inline-block;
+}
+
 .saveBtn Button {
-  width: 12rem;
+  width: 8rem;
+}
+
+input[type="text"],
+.inputItem {
+  margin-left: 0.5rem;
+  background-color: #fbe788;
+  border: 0;
+  border-bottom: 2px dotted;
 }

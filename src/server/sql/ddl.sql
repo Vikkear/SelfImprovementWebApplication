@@ -30,3 +30,9 @@ category VARCHAR
         (30)
 );
 
+        CREATE TABLE Todolists
+        (
+            username VARCHAR(30) PRIMARY KEY,
+            todo VARCHAR(500)
+        );
+
