@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import "./style/tracker.css";
+import "../style/tracker.css";
 
 const AddEntry = () => {
   const [category, setCategory] = useState("");

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import "./style/login.css";
-import "../App.css";
+import "../style/login.css";
+import "../../App.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");

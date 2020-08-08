@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import IconButton from "@material-ui/core/IconButton";
-import "./style/todo.css";
+import "../style/todo.css";
 
 const TodoElement = (props) => {
   const assignment = useState("");

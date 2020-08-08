@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
-import login from "./components/login";
+import login from "./components/Login/login";
 import Header from "./components/header";
-import Tracker from "./components/Tracker";
-import Quests from "./components/Quests";
-import Todo from "./components/Todo";
+import Tracker from "./components/Tracker/Tracker";
+import Quests from "./components/Quests/Quests";
+import Todo from "./components/Todo/Todo";
 import PrivateRoute from "./PrivateRoute";
 import "./App.css";
 import "./components/style/bootstrap-grid.css";

@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import TodoElement from "./TodoElement";
-import "./style/todo.css";
+import "../style/todo.css";
 
 const useStyles = makeStyles((theme) => ({
   button: {
