@@ -24,7 +24,7 @@ const Home = () => {
         Quests (WIP) <br /> Add/Show Quests
       </div>
       <div className="navigationBtn" onClick={todo}>
-        Todo (WIP) <br /> Todo list
+        Todo <br /> Todo list
       </div>
     </div>
   );
