@@ -98,8 +98,10 @@ const Todo = () => {
         },
       })
       .then((res) => {
-        decodeList(res.data.todo);
-        setUpdate(!update);
+        if (res.data) {
+          decodeList(res.data.todo);
+          setUpdate(!update);
+        }
       });
   };
 
