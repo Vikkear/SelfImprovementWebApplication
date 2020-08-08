@@ -26,6 +26,9 @@ const Header = () => {
           <li>
             <a href="quests">Quests</a>
           </li>
+          <li>
+            <a href="todo">Todo</a>
+          </li>
         </div>
       ) : (
         <li>
