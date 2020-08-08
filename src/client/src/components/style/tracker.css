@@ -2,8 +2,7 @@ input[type="text"].standardInput {
   background-color: white;
 }
 
-input[type="text"],
-select {
+input[type="text"].standardInput {
   width: 18%;
   padding: 12px 20px;
   margin: 8px 0;

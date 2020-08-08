@@ -61,23 +61,25 @@ const Login = () => {
     <div className="loginpage">
       <h1>Login</h1>
       <form>
-        <label>Username: </label> <br />
-        <input
-          type="text"
-          onChange={(e) => setUsername(e.target.value)}
-        ></input>
-        <br />
-        <label>Password: </label> <br />
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>{" "}
+        <div className="fields">
+          <label>Username: </label> <br />
+          <input
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+          <br />
+          <label>Password: </label> <br />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>{" "}
+        </div>
         <br /> <br />
-        <Button variant="primary" onClick={loginPressed}>
+        <Button className="button" variant="primary" onClick={loginPressed}>
           Login
         </Button>{" "}
         <br />
-        <Button variant="primary" onClick={registerPressed}>
+        <Button className="button" variant="primary" onClick={registerPressed}>
           Register
         </Button>
       </form>
