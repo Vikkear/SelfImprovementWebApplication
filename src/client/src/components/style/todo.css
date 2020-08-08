@@ -8,7 +8,9 @@
 }
 
 .wrapper {
+  width: 50rem;
   vertical-align: bottom;
+  display: inline-block;
 }
 
 .btns {
@@ -31,10 +33,18 @@
   width: 8rem;
 }
 
-input[type="text"],
-.inputItem {
+input[type="text"].inputItem {
   margin-left: 0.5rem;
   background-color: #fbe788;
   border: 0;
   border-bottom: 2px dotted;
+}
+
+.iconButton {
+  position: relative;
+  float: right;
+}
+
+.check {
+  display: inline-block;
 }

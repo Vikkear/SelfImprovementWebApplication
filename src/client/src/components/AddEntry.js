@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import "./style/tracker.css";
 
 const AddEntry = () => {
   const [category, setCategory] = useState("");
@@ -37,6 +38,7 @@ const AddEntry = () => {
           placeholder="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          className="standardInput"
         />{" "}
         <br />
         <input
@@ -44,6 +46,7 @@ const AddEntry = () => {
           placeholder="Value"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          className="standardInput"
         />{" "}
         <br />
         <Button variant="primary" onClick={submitEntry}>

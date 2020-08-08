@@ -3,7 +3,7 @@ import ViewEntryElement from "./ViewEntryElement";
 import axios from "axios";
 
 const ViewEntry = () => {
-  const [updated, setUpdated] = useState(false);
+  const [updated] = useState(false);
   const [categoryArr, setCategoryArr] = useState([]);
   const [showCategory, setShowCategory] = useState("");
   const [showCategoryArr, setShowCategoryArr] = useState([]);

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-
+import axios from "axios";
 import TodoElement from "./TodoElement";
 import "./style/todo.css";
 
@@ -21,15 +20,51 @@ const useStyles = makeStyles((theme) => ({
 const Todo = () => {
   const classes = useStyles();
   const [todoItems, setTodoItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
   const [addItemMode, setAddItemMode] = useState(false);
+  const [update, setUpdate] = useState(false);
   const [newItem, setNewItem] = useState("");
+
+  useEffect(() => {
+    getTodoList();
+  }, []);
 
   const addItem = () => {
     setAddItemMode(!addItemMode);
   };
 
-  const test = () => {
-    console.log(newItem);
+  const removeItem = (item) => {
+    setTodoItems(
+      todoItems.filter((e) => {
+        return e !== item;
+      })
+    );
+  };
+
+  const updateList = (i, checked) => {
+    checkedItems[i] = `${checked}`;
+  };
+
+  const formatList = () => {
+    let finalList = "{ ";
+
+    todoItems.forEach((item, i) => {
+      finalList += `"${item}": "${checkedItems[i]}",`;
+    });
+
+    finalList = finalList.slice(0, -1);
+    finalList += " }";
+
+    return finalList;
+  };
+
+  const decodeList = (list) => {
+    const parsedList = JSON.parse(list);
+
+    for (let [item, checked] of Object.entries(parsedList)) {
+      todoItems.push(item);
+      checkedItems.push(checked);
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -40,14 +75,49 @@ const Todo = () => {
     }
   };
 
+  const saveSmashed = () => {
+    const data = {
+      username: localStorage.getItem("username"),
+      todo: formatList(),
+    };
+
+    axios.post("/updatetodo", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  const getTodoList = () => {
+    const data = { username: localStorage.getItem("username") };
+
+    axios
+      .post("/gettodo", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        decodeList(res.data.todo);
+        setUpdate(!update);
+      });
+  };
+
   return (
     <div>
       <div>
         <h1> Todo List</h1>
       </div>
       <div className="todo">
-        {todoItems.map((item) => (
-          <TodoElement assignment={item} key={item} />
+        {todoItems.map((item, i) => (
+          <TodoElement
+            assignment={item}
+            checked={checkedItems[i]}
+            key={i}
+            index={i}
+            removeItem={removeItem}
+            updateList={updateList}
+          />
         ))}
         {addItemMode !== true ? (
           ""
@@ -78,7 +148,7 @@ const Todo = () => {
               color="primary"
               size="large"
               className={classes.button}
-              onClick={test}
+              onClick={saveSmashed}
             >
               Save
             </Button>

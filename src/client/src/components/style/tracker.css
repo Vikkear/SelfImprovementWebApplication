@@ -1,3 +1,7 @@
+input[type="text"].standardInput {
+  background-color: white;
+}
+
 input[type="text"],
 select {
   width: 18%;
@@ -7,6 +11,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: white;
 }
 
 button {

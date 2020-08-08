@@ -7,6 +7,7 @@
     "client": "cd ./src/client && npm run start",
     "server": "nodemon --ignore src/server/sessions/ src/server/index.js",
     "dev": "SET NODE_ENV=dev&& concurrently \"npm run server\" \"npm run client\"",
+    "localStart": "export NODE_ENV=dev&& node src/server/index.js",
     "start": "export NODE_ENV=prod&& node src/server/index.js",
     "winStart": "SET NODE_ENV=prod&& concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd src/client && npm install && npm run build",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/Vikkear/SelfImprovementWebApplication#readme",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.0",
     "bootstrap": "^4.4.1",
     "concurrently": "^5.2.0",
