@@ -33,21 +33,22 @@ const AddEntry = () => {
     <div>
       <h1>Add</h1>
       <form>
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="standardInput"
-        />{" "}
-        <br />
-        <input
-          type="text"
-          placeholder="Value"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className="standardInput"
-        />{" "}
+        <div className="standardInput">
+          <input
+            type="text"
+            placeholder="Category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />{" "}
+          <br />
+          <input
+            type="text"
+            placeholder="Value"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />{" "}
+        </div>
+
         <br />
         <Button variant="primary" onClick={submitEntry}>
           Submit
