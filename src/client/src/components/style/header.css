@@ -22,3 +22,10 @@ li a {
 li a:hover {
   background-color: #66c2ff;
 }
+
+@media only screen and (max-width: 787px) {
+  li a {
+    padding: 14px 10px;
+    font-size: 0.8rem;
+  }
+}
