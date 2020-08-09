@@ -39,7 +39,7 @@ const Home = () => {
       ) : (
         <div className="notLoggedIn">
           <h1>Welcome!</h1>
-          <div className="navigationBtn" onClick={tracker}>
+          <div className="navigationBtn" onClick={login}>
             Login <br />
           </div>
         </div>

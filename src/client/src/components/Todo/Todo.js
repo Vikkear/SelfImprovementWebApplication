@@ -30,7 +30,11 @@ const Todo = () => {
   }, []);
 
   const addItem = () => {
-    setAddItemMode(!addItemMode);
+    if (newItem !== "") {
+      todoItems.push(newItem);
+      setAddItemMode(false);
+      setNewItem("");
+    }
   };
 
   const removeItem = (item) => {
@@ -69,9 +73,7 @@ const Todo = () => {
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 13 && addItemMode) {
-      todoItems.push(newItem);
-      setAddItemMode(false);
-      setNewItem("");
+      addItem();
     }
   };
 
@@ -125,6 +127,8 @@ const Todo = () => {
           ""
         ) : (
           <input
+            autoFocus
+            onBlur={addItem}
             className="inputItem"
             type="text"
             value={newItem}
@@ -139,7 +143,7 @@ const Todo = () => {
               color="primary"
               size="large"
               className={classes.button}
-              onClick={addItem}
+              onClick={() => setAddItemMode(!addItemMode)}
             >
               Add Item
             </Button>
