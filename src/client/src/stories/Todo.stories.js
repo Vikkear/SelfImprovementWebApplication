@@ -1,6 +1,6 @@
 import React from "react";
 
-import Todo from "../components/Todo";
+import Todo from "../components/Todo/Todo";
 
 export default {
   title: "Todo",
