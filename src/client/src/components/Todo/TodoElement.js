@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import "../style/todo.css";
 
 const TodoElement = (props) => {
-  const assignment = useState("");
   const [checked, setChecked] = useState(props.checked === "true");
 
   useEffect(() => {
