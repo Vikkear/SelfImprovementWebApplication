@@ -13,6 +13,7 @@ const QuestElement = (props) => {
   const [open, setOpen] = useState(false);
   const [questFinished, setQuestFinished] = useState(false);
   const [currentScore, setCurrentScore] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   const openQuest = () => {
     if (!questFinished) setQuestFinished(questCheck());
@@ -24,6 +25,7 @@ const QuestElement = (props) => {
     setCategories(props.categories);
     setGoals(props.goals);
     setCurrentScore(props.currentScore);
+    setUpdate(!update);
   }, []);
 
   const questCheck = () => {
@@ -68,10 +70,20 @@ const QuestElement = (props) => {
         >
           <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending
-              anonymous location data to Google, even when no apps are running.
-            </DialogContentText>
+            {goals.map((goal, i) => (
+              <div>
+                <DialogContentText
+                  id="alert-dialog-description"
+                  style={
+                    currentScore[i] >= goal
+                      ? { color: "green" }
+                      : { color: "black" }
+                  }
+                >
+                  {`${categories[i]}: ${currentScore[i]}/${goal}`}
+                </DialogContentText>
+              </div>
+            ))}
           </DialogContent>
           <DialogActions>
             {!questFinished ? (
