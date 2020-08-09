@@ -1,0 +1,19 @@
+.quest {
+  display: inline-block;
+  width: 25%;
+  background-color: black;
+}
+
+.title {
+  margin: 20px;
+}
+
+.quest:hover {
+  background-color: #66c2ff;
+}
+
+@media only screen and (max-width: 787px) {
+  .quest {
+    width: 49%;
+  }
+}

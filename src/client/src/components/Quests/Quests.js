@@ -1,4 +1,5 @@
 import React from "react";
+import "../style/quests.css";
 
 const Quests = () => {
   return (
