@@ -1,5 +1,6 @@
 const Tracker = require("../../db/models/Tracker");
 const Categories = require("../../db/models/Categories");
+const Sequelize = require("sequelize");
 
 module.exports = (app) => {
   app.post("/tracker", (req, res) => {
@@ -54,5 +55,25 @@ module.exports = (app) => {
       .catch((err) => {
         console.log(err);
       });
+  });
+
+  app.post("/getAllCategoriesForUser", (req, res) => {
+    const username = req.body.username;
+
+    Tracker.findAll({
+      attributes: [
+        [Sequelize.fn("DISTINCT", Sequelize.col("category")), "category"],
+      ],
+      where: { username: username },
+    })
+      .then((trackers) => {
+        let categories = [];
+        trackers.forEach((tracker) => {
+          categories.push(tracker.dataValues.category);
+        });
+
+        res.json({ data: categories });
+      })
+      .catch((err) => res.json(err));
   });
 };

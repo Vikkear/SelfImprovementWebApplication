@@ -30,7 +30,8 @@ const Home = () => {
             Tracker <br /> Tracks all of your entries
           </div>
           <div className="navigationBtn" onClick={quests}>
-            Quests (WIP) <br /> Add/Show Quests
+            Quests
+            <br /> Add/Show Quests
           </div>
           <div className="navigationBtn" onClick={todo}>
             Todo <br /> Todo list

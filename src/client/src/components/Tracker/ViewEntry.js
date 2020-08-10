@@ -3,14 +3,16 @@ import ViewEntryElement from "./ViewEntryElement";
 import axios from "axios";
 
 const ViewEntry = () => {
-  const [updated] = useState(false);
+  const [updated, setUpdated] = useState(false);
   const [categoryArr, setCategoryArr] = useState([]);
   const [showCategory, setShowCategory] = useState("");
   const [showCategoryArr, setShowCategoryArr] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/categories")
+      .post("/getAllCategoriesForUser", {
+        username: localStorage.getItem("username"),
+      })
       .then((res) => {
         setCategoryArr(res.data.data);
       })
@@ -26,13 +28,16 @@ const ViewEntry = () => {
   return (
     <div>
       <h1>View</h1>
-      {categoryArr.map((category) => (
-        <ViewEntryElement
-          categoryName={category.category}
-          showCategory={setShowCategory}
-          showCategoryArr={setShowCategoryArr}
-        />
-      ))}
+      {categoryArr
+        ? categoryArr.map((category) => (
+            <ViewEntryElement
+              categoryName={category}
+              showCategory={setShowCategory}
+              showCategoryArr={setShowCategoryArr}
+              key={category}
+            />
+          ))
+        : ""}
 
       {showCategory ? <h1>{showCategory}</h1> : <p></p>}
       {showCategoryArr ? (
