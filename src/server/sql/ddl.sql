@@ -3,6 +3,8 @@ USE selfimprovement;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Trackers;
 DROP TABLE IF EXISTS Categories;
+DROP TABLE IF EXISTS Todolists;
+DROP TABLE IF EXISTS Quests;
 
 CREATE TABLE Users
 (
@@ -36,3 +38,11 @@ category VARCHAR
             todo VARCHAR(500)
         );
 
+        CREATE TABLE Quests
+        (
+            username VARCHAR(30) PRIMARY KEY,
+            title VARCHAR(50),
+            quest VARCHAR(500),
+            start_date DATE NOT NULL,
+            finish_date DATE
+        );
