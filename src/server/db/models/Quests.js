@@ -6,7 +6,6 @@ module.exports = db.sequelize.define(
   {
     username: {
       type: Sequelize.INTEGER,
-      primaryKey: true,
     },
     title: {
       type: Sequelize.STRING,
