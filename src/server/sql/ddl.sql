@@ -40,9 +40,14 @@ category VARCHAR
 
         CREATE TABLE Quests
         (
-            username VARCHAR(30),
-            title VARCHAR(50),
-            quest VARCHAR(500),
+            id INT NOT NULL
+            AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR
+            (30),
+            title VARCHAR
+            (50),
+            quest VARCHAR
+            (500),
             start_date DATE NOT NULL,
             finish_date DATE
         );

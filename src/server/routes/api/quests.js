@@ -2,7 +2,7 @@ const Quests = require("../../db/models/Quests");
 
 module.exports = (app) => {
   app.get("/getQuestsForUser", (req, res) => {
-    Quests.findAll({ where: { username: req.body.username } })
+    Quests.findAll({ where: { username: req.query.username } })
       .then((quests) => {
         res.status(200).json({ data: quests });
       })

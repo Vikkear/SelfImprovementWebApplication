@@ -6,27 +6,30 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import axios from "axios";
 
 const QuestElement = (props) => {
   const [categories, setCategories] = useState([]);
   const [goals, setGoals] = useState([]);
+  const [currentScore, setCurrentScore] = useState([]);
   const [open, setOpen] = useState(false);
   const [questFinished, setQuestFinished] = useState(false);
-  const [currentScore, setCurrentScore] = useState([]);
   const [update, setUpdate] = useState(false);
+  const [quest, setQuest] = useState([]);
 
   const openQuest = () => {
     if (!questFinished) setQuestFinished(questCheck());
-
     setOpen(true);
   };
 
   useEffect(() => {
-    setCategories(props.categories);
-    setGoals(props.goals);
-    setCurrentScore(props.currentScore);
+    setQuest(props.quest);
     setUpdate(!update);
   }, []);
+
+  useEffect(() => {
+    decodeQuest();
+  }, [quest]);
 
   const questCheck = () => {
     let isFinished = true;
@@ -37,14 +40,37 @@ const QuestElement = (props) => {
       }
     }
 
-    console.log(isFinished);
-
     return isFinished;
   };
 
+  const decodeQuest = () => {
+    let tempCategories = [];
+    let tempGoals = [];
+    let tempCurrentScore = [];
+
+    quest.forEach((goal) => {
+      tempCategories.push(goal.category);
+      tempGoals.push(goal.goal);
+      tempCurrentScore.push(0);
+    });
+
+    setCategories(tempCategories);
+    setGoals(tempGoals);
+    setCurrentScore(tempCurrentScore);
+  };
+
   const abandonQuest = () => {
-    // Todo: Call for backend to remove quest
-    setOpen(false);
+    const data = {
+      username: localStorage.getItem("username"),
+      title: props.title,
+    };
+
+    axios
+      .delete("/removeQuest", { data: data })
+      .then(() => {
+        setOpen(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   const finishQuest = () => {
@@ -61,29 +87,36 @@ const QuestElement = (props) => {
       <div className="title" onClick={openQuest}>
         {props.title}
       </div>
-      <div>
+      <div className="popup">
         <Dialog
           open={open}
           onClose={closeQuest}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
+          maxWidth={"sm"}
+          fullWidth={true}
         >
-          <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
+          <DialogTitle id="alert-dialog-title" style={{ textAlign: "center" }}>
+            {props.title}
+          </DialogTitle>
           <DialogContent>
-            {goals.map((goal, i) => (
-              <div>
-                <DialogContentText
-                  id="alert-dialog-description"
-                  style={
-                    currentScore[i] >= goal
-                      ? { color: "green" }
-                      : { color: "black" }
-                  }
-                >
-                  {`${categories[i]}: ${currentScore[i]}/${goal}`}
-                </DialogContentText>
-              </div>
-            ))}
+            {goals
+              ? goals.map((goal, i) => (
+                  <div key={i}>
+                    <DialogContentText
+                      id="alert-dialog-description"
+                      key={i}
+                      style={
+                        currentScore[i] >= goal
+                          ? { color: "green" }
+                          : { color: "black" }
+                      }
+                    >
+                      {`${categories[i]}: ${currentScore[i]}/${goal}`}
+                    </DialogContentText>
+                  </div>
+                ))
+              : ""}
           </DialogContent>
           <DialogActions>
             {!questFinished ? (
@@ -91,7 +124,7 @@ const QuestElement = (props) => {
                 <Button
                   onClick={abandonQuest}
                   color="primary"
-                  style={{ color: "red" }}
+                  style={{ color: "red", float: "right" }}
                 >
                   Abandon
                 </Button>
@@ -104,7 +137,7 @@ const QuestElement = (props) => {
                 <Button
                   onClick={finishQuest}
                   color="primary"
-                  style={{ color: "green" }}
+                  style={{ color: "green", float: "right" }}
                 >
                   Turn in quest
                 </Button>
