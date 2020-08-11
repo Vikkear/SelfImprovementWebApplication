@@ -40,7 +40,7 @@ category VARCHAR
 
         CREATE TABLE Quests
         (
-            username VARCHAR(30) PRIMARY KEY,
+            username VARCHAR(30),
             title VARCHAR(50),
             quest VARCHAR(500),
             start_date DATE NOT NULL,
