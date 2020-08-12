@@ -1,9 +1,10 @@
 const Tracker = require("../../db/models/Tracker");
 const Categories = require("../../db/models/Categories");
 const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 module.exports = (app) => {
-  app.post("/tracker", (req, res) => {
+  app.post("/getAllTracksInCategory", (req, res) => {
     Tracker.findAll({
       where: { username: req.body.username, category: req.body.category },
     })
@@ -11,6 +12,33 @@ module.exports = (app) => {
         res.status(200).json({ tracker: resTwo });
       })
       .catch((err) => err);
+  });
+
+  app.post("/getAmountOfTracksAfterDate", (req, res) => {
+    Tracker.findAll({
+      where: {
+        username: req.body.username,
+        category: req.body.category,
+        dateSubmitted: {
+          [Op.gte]: req.body.dateSubmitted,
+        },
+      },
+    })
+      .then((resTwo) => {
+        let totalAmount = 0;
+
+        resTwo.forEach((track) => {
+          totalAmount += track.dataValues.amount;
+        });
+
+        res
+          .status(200)
+          .json({ category: req.body.category, amount: totalAmount });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json({ err: err });
+      });
   });
 
   app.get("/categories", (req, res) => {

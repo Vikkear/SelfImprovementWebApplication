@@ -10,7 +10,7 @@ const ViewEntryElement = (props) => {
     };
 
     axios
-      .post("/tracker", data, {
+      .post("/getAllTracksInCategory", data, {
         headers: {
           "Content-Type": "application/json",
         },

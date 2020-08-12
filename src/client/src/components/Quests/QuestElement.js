@@ -31,6 +31,10 @@ const QuestElement = (props) => {
     decodeQuest();
   }, [quest]);
 
+  useEffect(() => {
+    getScores();
+  }, [categories]);
+
   const questCheck = () => {
     let isFinished = true;
 
@@ -56,6 +60,27 @@ const QuestElement = (props) => {
 
     setCategories(tempCategories);
     setGoals(tempGoals);
+    setCurrentScore(tempCurrentScore);
+  };
+
+  const getScores = () => {
+    let tempCurrentScore = [];
+
+    categories.forEach((category) => {
+      const data = {
+        username: localStorage.getItem("username"),
+        category: category,
+        dateSubmitted: props.start_date,
+      };
+
+      axios
+        .post("/getAmountOfTracksAfterDate", data)
+        .then((res) => {
+          tempCurrentScore.push(res.data.amount);
+        })
+        .catch((err) => console.log(err));
+    });
+
     setCurrentScore(tempCurrentScore);
   };
 

@@ -29,7 +29,6 @@ const Quests = () => {
   }, []);
 
   useEffect(() => {
-    console.log(quests);
     setUpdate(!update);
   }, [quests]);
 
