@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS Quests;
 CREATE TABLE Users
 (
     username VARCHAR(30),
-    password VARCHAR(30)
+    password VARCHAR(150)
 );
 
 CREATE TABLE Trackers
