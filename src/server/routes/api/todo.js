@@ -10,13 +10,13 @@ module.exports = (app) => {
       if (!user) {
         Todolist.create({ username: data.username, todo: data.todo }).then(
           (resTwo) => {
-            res.json(resTwo);
+            res.status(201).json(resTwo);
           }
         );
       } else {
         Todolist.update(data, { where: { username: data.username } }).then(
           (resTwo) => {
-            res.json(resTwo);
+            res.status(200).json(resTwo);
           }
         );
       }
@@ -27,7 +27,7 @@ module.exports = (app) => {
     const username = req.body.username;
 
     Todolist.findOne({ where: { username: username } }).then((resTwo) => {
-      res.json(resTwo);
+      res.status(202).json(resTwo);
     });
   });
 };

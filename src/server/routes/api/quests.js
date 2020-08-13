@@ -7,7 +7,7 @@ module.exports = (app) => {
         res.status(200).json({ data: quests });
       })
       .catch((err) => {
-        res.json({ err: err });
+        res.status(500).json({ err: err });
       });
   });
 
