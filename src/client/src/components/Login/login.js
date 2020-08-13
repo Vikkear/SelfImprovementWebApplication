@@ -19,10 +19,10 @@ const Login = () => {
         },
       })
       .then((res) => {
-        if (res.data.username) {
+        if (res.data.token) {
+          localStorage.token = res.data.token;
           localStorage.loggedin = 1;
           localStorage.username = res.data.username;
-          // TODO: Fix so it works on an app
           window.location.replace("/");
         } else {
           setErrorMessage("Username or password is incorrect");

@@ -1,8 +1,15 @@
 const User = require("../../db/models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const SALT_VALUE = 10;
 
 module.exports = (app) => {
+  function generateAccessToken(username) {
+    return jwt.sign(username, process.env.TOKEN_SECRET, {
+      expiresIn: "30000s",
+    });
+  }
+
   app.post("/login", (req, res) => {
     let data = {
       username: req.body.username.toLowerCase(),
@@ -16,8 +23,10 @@ module.exports = (app) => {
         if (users) {
           bcrypt.compare(data.password, users.password, function (err, resTwo) {
             if (resTwo) {
-              // Todo: Generate token and send it back
-              res.status(200).json(users);
+              const token = generateAccessToken({
+                username: req.body.username,
+              });
+              res.status(200).json({ token: token, username: data.username });
             } else {
               res.status(202).json({ message: "Passwords does not match" });
             }

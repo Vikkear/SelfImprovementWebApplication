@@ -24,6 +24,8 @@ const Quests = () => {
   const [newQuestGoal, setNewQuestGoal] = useState(0);
   const [newQuestFinishDate, setNewQuestFinishDate] = useState(new Date());
 
+  const userToken = localStorage.getItem("token");
+
   useEffect(() => {
     getQuests();
   }, []);
@@ -37,6 +39,9 @@ const Quests = () => {
     axios
       .get("/getQuestsForUser", {
         params: { username: localStorage.getItem("username") },
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
       })
       .then((res) => {
         setQuests(res.data.data);
@@ -66,7 +71,11 @@ const Quests = () => {
     };
 
     axios
-      .post("/addQuest", data)
+      .post("/addQuest", data, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
       .then((res) => {
         setOpen(false);
         setUpdate(!update);

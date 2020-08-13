@@ -6,6 +6,7 @@ import "../style/tracker.css";
 const AddEntry = () => {
   const [category, setCategory] = useState("");
   const [value, setValue] = useState(0);
+  const userToken = localStorage.getItem("token");
 
   const submitEntry = () => {
     const data = {
@@ -18,6 +19,7 @@ const AddEntry = () => {
       .post("/addEntry", data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         },
       })
       .then((res) => {

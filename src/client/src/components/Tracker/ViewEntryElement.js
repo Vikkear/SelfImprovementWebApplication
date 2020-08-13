@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 
 const ViewEntryElement = (props) => {
+  const userToken = localStorage.getItem("token");
   const submitEntry = () => {
     const data = {
       username: localStorage.getItem("username"),
@@ -13,6 +14,7 @@ const ViewEntryElement = (props) => {
       .post("/getAllTracksInCategory", data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         },
       })
       .then((res) => {

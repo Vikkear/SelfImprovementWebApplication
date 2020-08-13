@@ -1,7 +1,21 @@
 const Quests = require("../../db/models/Quests");
+const jwt = require("jsonwebtoken");
 
 module.exports = (app) => {
-  app.get("/getQuestsForUser", (req, res) => {
+  function authenticateToken(req, res, next) {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (token == null) return res.status(401).send({ message: "knas" });
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+      console.log(err);
+      if (err) return res.status(403).send({ err: err });
+      req.user = user;
+      next();
+    });
+  }
+
+  app.get("/getQuestsForUser", authenticateToken, (req, res) => {
     Quests.findAll({ where: { username: req.query.username } })
       .then((quests) => {
         res.status(200).json({ data: quests });
@@ -11,7 +25,7 @@ module.exports = (app) => {
       });
   });
 
-  app.post("/addQuest", (req, res) => {
+  app.post("/addQuest", authenticateToken, (req, res) => {
     const data = {
       username: req.body.username,
       title: req.body.title,
@@ -38,7 +52,7 @@ module.exports = (app) => {
     });
   });
 
-  app.delete("/removeQuest", (req, res) => {
+  app.delete("/removeQuest", authenticateToken, (req, res) => {
     Quests.destroy({
       where: {
         username: req.body.username,

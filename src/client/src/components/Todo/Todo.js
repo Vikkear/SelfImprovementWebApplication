@@ -24,6 +24,7 @@ const Todo = () => {
   const [addItemMode, setAddItemMode] = useState(false);
   const [update, setUpdate] = useState(false);
   const [newItem, setNewItem] = useState("");
+  const userToken = localStorage.getItem("token");
 
   useEffect(() => {
     getTodoList();
@@ -86,6 +87,7 @@ const Todo = () => {
     axios.post("/updatetodo", data, {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
       },
     });
   };
@@ -97,6 +99,7 @@ const Todo = () => {
       .post("/gettodo", data, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         },
       })
       .then((res) => {

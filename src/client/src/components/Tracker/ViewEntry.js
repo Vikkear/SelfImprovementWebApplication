@@ -7,12 +7,21 @@ const ViewEntry = () => {
   const [categoryArr, setCategoryArr] = useState([]);
   const [showCategory, setShowCategory] = useState("");
   const [showCategoryArr, setShowCategoryArr] = useState([]);
+  const userToken = localStorage.getItem("token");
 
   useEffect(() => {
     axios
-      .post("/getAllCategoriesForUser", {
-        username: localStorage.getItem("username"),
-      })
+      .post(
+        "/getAllCategoriesForUser",
+        {
+          username: localStorage.getItem("username"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      )
       .then((res) => {
         setCategoryArr(res.data.data);
       })

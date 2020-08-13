@@ -1,7 +1,21 @@
 const Todolist = require("../../db/models/Todolist");
+const jwt = require("jsonwebtoken");
 
 module.exports = (app) => {
-  app.post("/updatetodo", (req, res) => {
+  function authenticateToken(req, res, next) {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (token == null) return res.status(401).send({ message: "knas" });
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+      console.log(err);
+      if (err) return res.status(403).send({ err: err });
+      req.user = user;
+      next();
+    });
+  }
+
+  app.post("/updatetodo", authenticateToken, (req, res) => {
     let data = { username: req.body.username, todo: req.body.todo };
 
     Todolist.findOne({
@@ -23,7 +37,7 @@ module.exports = (app) => {
     });
   });
 
-  app.post("/gettodo", (req, res) => {
+  app.post("/gettodo", authenticateToken, (req, res) => {
     const username = req.body.username;
 
     Todolist.findOne({ where: { username: username } }).then((resTwo) => {

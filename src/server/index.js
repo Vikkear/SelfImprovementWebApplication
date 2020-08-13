@@ -1,6 +1,10 @@
 "use strict";
-const port = process.env.PORT || 8000;
+const jwt = require("./jsonconfig");
 
+const port = process.env.PORT || 8000;
+process.env.SECRET = process.env.SECRET_KEY || jwt.secret;
+
+require("dotenv").config();
 // Set up Express server
 const express = require("express");
 const app = express();

@@ -1,10 +1,24 @@
 const Tracker = require("../../db/models/Tracker");
 const Categories = require("../../db/models/Categories");
 const Sequelize = require("sequelize");
+const jwt = require("jsonwebtoken");
 const Op = Sequelize.Op;
 
 module.exports = (app) => {
-  app.post("/getAllTracksInCategory", (req, res) => {
+  function authenticateToken(req, res, next) {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (token == null) return res.status(401).send({ message: "knas" });
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+      console.log(err);
+      if (err) return res.status(403).send({ err: err });
+      req.user = user;
+      next();
+    });
+  }
+
+  app.post("/getAllTracksInCategory", authenticateToken, (req, res) => {
     Tracker.findAll({
       where: { username: req.body.username, category: req.body.category },
     })
@@ -14,7 +28,7 @@ module.exports = (app) => {
       .catch((err) => err);
   });
 
-  app.post("/getAmountOfTracksAfterDate", (req, res) => {
+  app.post("/getAmountOfTracksAfterDate", authenticateToken, (req, res) => {
     Tracker.findAll({
       where: {
         username: req.body.username,
@@ -41,7 +55,7 @@ module.exports = (app) => {
       });
   });
 
-  app.get("/categories", (req, res) => {
+  app.get("/categories", authenticateToken, (req, res) => {
     Categories.findAll()
       .then((categories) => {
         res.status(200).json({ data: categories });
@@ -49,7 +63,7 @@ module.exports = (app) => {
       .catch((err) => err);
   });
 
-  app.post("/addEntry", (req, res) => {
+  app.post("/addEntry", authenticateToken, (req, res) => {
     const todayString = new Date();
 
     let data = {
@@ -85,7 +99,7 @@ module.exports = (app) => {
       });
   });
 
-  app.post("/getAllCategoriesForUser", (req, res) => {
+  app.post("/getAllCategoriesForUser", authenticateToken, (req, res) => {
     const username = req.body.username;
 
     Tracker.findAll({

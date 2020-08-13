@@ -16,6 +16,7 @@ const QuestElement = (props) => {
   const [questFinished, setQuestFinished] = useState(false);
   const [update, setUpdate] = useState(false);
   const [quest, setQuest] = useState([]);
+  const userToken = localStorage.getItem("token");
 
   const openQuest = () => {
     if (!questFinished) setQuestFinished(questCheck());
@@ -74,7 +75,11 @@ const QuestElement = (props) => {
       };
 
       axios
-        .post("/getAmountOfTracksAfterDate", data)
+        .post("/getAmountOfTracksAfterDate", data, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
         .then((res) => {
           tempCurrentScore.push(res.data.amount);
         })
@@ -91,7 +96,15 @@ const QuestElement = (props) => {
     };
 
     axios
-      .delete("/removeQuest", { data: data })
+      .delete(
+        "/removeQuest",
+        { data: data },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      )
       .then(() => {
         setOpen(false);
       })
